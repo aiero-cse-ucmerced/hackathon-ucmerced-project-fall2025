@@ -89,6 +89,44 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* More for you */}
+      <section className="p-4 mt-4">
+        <h2 className="text-xl font-semibold mb-4">More for you</h2>
+        <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
+          {/* Card 1 */}
+          <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
+            <div className="flex space-x-2 mb-2">
+              <span className="bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full"># Science</span>
+              <span className="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
+                New
+              </span>
+            </div>
+            <p className="text-lg font-semibold">Introduction to Physics</p>
+            <button className="mt-2 text-gray-600 self-end">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Card 2 */}
+          <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
+            <div className="flex space-x-2 mb-2">
+              <span className="bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full"># Art</span>
+              <span className="bg-red-200 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
+                Popular
+              </span>
+            </div>
+            <p className="text-lg font-semibold">Drawing Fundamentals</p>
+            <button className="mt-2 text-gray-600 self-end">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 flex justify-around items-center">
         <button className="text-gray-600">
