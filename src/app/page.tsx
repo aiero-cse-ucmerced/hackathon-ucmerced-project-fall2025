@@ -1,10 +1,10 @@
-import RootLayout from "./layout";
+import Layout from "./layout";
 import Image from "next/image";
 import HeroImage from "../images/student.png";
 
 export default function Home() {
   return (
-    <RootLayout includeHeader>
+    <Layout includeHeader>
       <p>Welcome to the Intelligent Flashcards App!</p>
       <Image
         src={HeroImage}
@@ -12,6 +12,6 @@ export default function Home() {
         width={300}
         height={200}
       />
-    </RootLayout>
+    </Layout>
   );
 }

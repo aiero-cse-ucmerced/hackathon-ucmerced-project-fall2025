@@ -23,7 +23,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export default function RootLayout(props?: Props) {
+export default function Layout(props?: Props) {
   return (
     <html lang="en">
       <body
