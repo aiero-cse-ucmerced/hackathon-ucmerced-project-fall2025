@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 interface Props {
-  header?: boolean;
+  includeHeader?: boolean;
   children?: React.ReactNode;
 }
 
@@ -29,7 +29,7 @@ export default function RootLayout(props?: Props) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {props?.header && <Header />}
+        {props?.includeHeader && <Header />}
         <main>{props?.children}</main>
       </body>
     </html>

@@ -2,7 +2,7 @@ import RootLayout from "./layout";
 
 export default function Home() {
   return (
-    <RootLayout header>
+    <RootLayout includeHeader>
       <p>Welcome to the Intelligent Flashcards App!</p>
     </RootLayout>
   );
