@@ -1,7 +1,7 @@
 export default function Header() {
     return (
       <header>
-        <h1 className="font-bold">Intelligent Flashcards</h1>
+        <h1 className="">Intelligent Flashcards</h1>
       </header>
     )
 }

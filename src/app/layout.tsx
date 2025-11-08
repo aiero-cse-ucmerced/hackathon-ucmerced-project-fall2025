@@ -31,7 +31,6 @@ export default function Layout(props?: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {props?.includeHeader && <Header />}
-        <main className={`${props?.centerChildren ? "flex justify-center" : ""}`}>{props?.children}</main>
       </body>
     </html>
   );
