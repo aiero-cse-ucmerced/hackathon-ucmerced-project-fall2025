@@ -8,7 +8,12 @@ const PreferencesPage = () => {
   const [activeTab, setActiveTab] = useState('account'); // 'account', 'customize', 'mobile', 'email', 'plan'
   const [emailNotifications, setEmailNotifications] = useState(false);
   const [mobileNotifications, setMobileNotifications] = useState(false);
-  const [theme, setTheme] = useState('light'); // 'light', 'dark', 'system'
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'light';
+    }
+    return 'light';
+  }); // 'light', 'dark', 'system'
   const [enableHover, setEnableHover] = useState(false);
   const [studyRemindersEmail, setStudyRemindersEmail] = useState(false);
   const [practiceNotificationsEmail, setPracticeNotificationsEmail] = useState(false);
@@ -193,7 +198,11 @@ const PreferencesPage = () => {
                 name="theme"
                 value="light"
                 checked={theme === 'light'}
-                onChange={() => setTheme('light')}
+                onChange={() => {
+                  setTheme('light');
+                  localStorage.setItem('theme', 'light');
+                  document.documentElement.className = 'light';
+                }}
                 className="mr-2"
               />
               Light
@@ -204,7 +213,11 @@ const PreferencesPage = () => {
                 name="theme"
                 value="dark"
                 checked={theme === 'dark'}
-                onChange={() => setTheme('dark')}
+                onChange={() => {
+                  setTheme('dark');
+                  localStorage.setItem('theme', 'dark');
+                  document.documentElement.className = 'dark';
+                }}
                 className="mr-2"
               />
               Dark
@@ -215,7 +228,11 @@ const PreferencesPage = () => {
                 name="theme"
                 value="system"
                 checked={theme === 'system'}
-                onChange={() => setTheme('system')}
+                onChange={() => {
+                  setTheme('system');
+                  localStorage.setItem('theme', 'system');
+                  document.documentElement.className = 'system';
+                }}
                 className="mr-2"
               />
               System

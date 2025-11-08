@@ -1,7 +1,10 @@
+'use client';
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "../components/header";
+import { useEffect, useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,8 +33,17 @@ interface Props {
 }
 
 export default function Layout(props?: Props) {
+  const [theme, setTheme] = useState("light"); // Default theme
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
+
   return (
-    <html lang="en">
+    <html lang="en" className={theme}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
