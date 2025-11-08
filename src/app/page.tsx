@@ -13,10 +13,10 @@ export default function Home() {
         width={300}
         height={200}
       />
-      <Button href="/login/signup" cta>Create Flashcards Now</Button>
+      <Button href="/signup" cta>Create Flashcards Now</Button>
       <section className="flex flex-col items-center gap-2">
         <p>Already have an account?</p>
-        <Button href="/login/signup">Login</Button>
+        <Button href="/login">Login</Button>
       </section>
     </Main>
   );
