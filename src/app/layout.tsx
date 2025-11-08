@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 interface Props {
   includeHeader?: boolean;
   children?: React.ReactNode;
+  centerChildren?: boolean;
 }
 
 export default function Layout(props?: Props) {
@@ -30,7 +31,7 @@ export default function Layout(props?: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {props?.includeHeader && <Header />}
-        <main>{props?.children}</main>
+        <main className={`${props?.centerChildren ? "flex justify-center" : ""}`}>{props?.children}</main>
       </body>
     </html>
   );

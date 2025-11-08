@@ -4,7 +4,7 @@ import HeroImage from "../images/student.png";
 
 export default function Home() {
   return (
-    <Layout includeHeader>
+    <Layout includeHeader centerChildren>
       <p>Welcome to the Intelligent Flashcards App!</p>
       <Image
         src={HeroImage}
