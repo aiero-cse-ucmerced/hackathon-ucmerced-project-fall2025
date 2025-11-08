@@ -1,6 +1,6 @@
 import RootLayout from "./layout";
 import Image from "next/image";
-import HeroImage from "../images/IntelligentFlashcardsHero.png";
+import HeroImage from "../images/student.png";
 
 export default function Home() {
   return (
