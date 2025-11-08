@@ -39,49 +39,53 @@ const HomePage = () => {
       <section className="p-4">
         <h2 className="text-xl font-semibold mb-4">Recommendations</h2>
         <CategoryFilter
-          categories={['School', 'Languages', 'Languages']}
+          categories={['School', 'Languages']}
           onSelectCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
         />
 
         <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
-          {/* Card 1 */}
-          <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
-            <div className="flex space-x-2 mb-2">
-              <span className="bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full"># Driving</span>
-              <span className="bg-green-200 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Top Pick
-              </span>
-            </div>
-            <p className="text-lg font-semibold">DMV Permit Test</p>
-            <button className="mt-2 text-gray-600 self-end">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+          {selectedCategory === 'School' && (
+            <>
+              {/* Card 1 */}
+              <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
+                <div className="flex space-x-2 mb-2">
+                  <span className="bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full"># Driving</span>
+                  <span className="bg-green-200 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Top Pick
+                  </span>
+                </div>
+                <p className="text-lg font-semibold">DMV Permit Test</p>
+                <button className="mt-2 text-gray-600 self-end">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
 
-          {/* Card 2 (duplicate for now) */}
-          <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
-            <div className="flex space-x-2 mb-2">
-              <span className="bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full"># Driving</span>
-              <span className="bg-green-200 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Top Pick
-              </span>
-            </div>
-            <p className="text-lg font-semibold">DMV Permit Test</p>
-            <button className="mt-2 text-gray-600 self-end">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+              {/* Card 2 (duplicate for now) */}
+              <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
+                <div className="flex space-x-2 mb-2">
+                  <span className="bg-gray-200 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full"># Driving</span>
+                  <span className="bg-green-200 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Top Pick
+                  </span>
+                </div>
+                <p className="text-lg font-semibold">DMV Permit Test</p>
+                <button className="mt-2 text-gray-600 self-end">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
