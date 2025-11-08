@@ -21,7 +21,7 @@ const HomePage = () => {
 
       {/* Continue where you left off */}
       <section className="p-4">
-        <h2 className="text-xl font-semibold mb-4">Continue where you left off</h2>
+        <h2 className="text-xl font-medium mb-4">Continue where you left off</h2>
         <div className="bg-gray-100 rounded-lg p-4 flex justify-between items-center shadow-md">
           <div>
             <span className="bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">50% Progress</span>
@@ -37,7 +37,7 @@ const HomePage = () => {
 
       {/* Recommendations */}
       <section className="p-4">
-        <h2 className="text-xl font-semibold mb-4">Recommendations</h2>
+        <h2 className="text-xl font-medium mb-4">Recommendations</h2>
         <CategoryFilter
           categories={['School', 'Languages']}
           onSelectCategory={setSelectedCategory}
@@ -58,7 +58,7 @@ const HomePage = () => {
                     Top Pick
                   </span>
                 </div>
-                <p className="text-lg font-semibold">DMV Permit Test</p>
+                <p className="text-lg font-medium">DMV Permit Test</p>
                 <button className="mt-2 text-gray-600 self-end">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -77,7 +77,7 @@ const HomePage = () => {
                     Top Pick
                   </span>
                 </div>
-                <p className="text-lg font-semibold">DMV Permit Test</p>
+                <p className="text-lg font-medium">DMV Permit Test</p>
                 <button className="mt-2 text-gray-600 self-end">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -91,7 +91,7 @@ const HomePage = () => {
 
       {/* More for you */}
       <section className="p-4 mt-4">
-        <h2 className="text-xl font-semibold mb-4">More for you</h2>
+        <h2 className="text-xl font-medium mb-4">More for you</h2>
         <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
           {/* Card 1 */}
           <div className="flex-shrink-0 w-64 bg-gray-100 rounded-lg p-4 shadow-md">
@@ -101,7 +101,7 @@ const HomePage = () => {
                 New
               </span>
             </div>
-            <p className="text-lg font-semibold">Introduction to Physics</p>
+            <p className="text-lg font-medium">Introduction to Physics</p>
             <button className="mt-2 text-gray-600 self-end">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -117,7 +117,7 @@ const HomePage = () => {
                 Popular
               </span>
             </div>
-            <p className="text-lg font-semibold">Drawing Fundamentals</p>
+            <p className="text-lg font-medium">Drawing Fundamentals</p>
             <button className="mt-2 text-gray-600 self-end">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
