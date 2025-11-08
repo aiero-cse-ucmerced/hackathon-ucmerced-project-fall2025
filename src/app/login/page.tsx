@@ -99,6 +99,28 @@ export default function LoginPage() {
           </button>
         </div>
 
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300 dark:border-gray-700" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-white dark:bg-gray-900 px-2 text-gray-500 dark:text-gray-400">
+              Or Login With
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+          >
+            {/* Google Icon Placeholder */}
+            <img src="/images/google-icon.svg" alt="Google" className="h-5 w-5 mr-2" />
+            Google
+          </button>
+        </div>
+
         <div className="text-center text-sm">
           <span className="text-gray-600 dark:text-gray-400">
             Don't have an account?{" "}
