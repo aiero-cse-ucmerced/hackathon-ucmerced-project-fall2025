@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --foreground-secondary: #4b5563;
+  --foreground-tertiary: #6b7280;
+  --background-secondary: #f9fafb;
+  --background-tertiary: #f3f4f6;
+  --border-color: #e5e7eb;
 }
 
 @theme inline {
@@ -12,15 +17,66 @@
   --font-mono: var(--font-geist-mono);
 }
 
+<<<<<<< HEAD
+/* Dark mode styles */
+.dark {
+  --background: #111827;
+  --foreground: #f9fafb;
+  --foreground-secondary: #d1d5db;
+  --foreground-tertiary: #9ca3af;
+  --background-secondary: #1f2937;
+  --background-tertiary: #374151;
+  --border-color: #374151;
+}
+
+/* Apply background and text color to html element so it cascades everywhere */
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+=======
 /* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 } */
+>>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  min-height: 100vh;
 }
+
+/* Utility classes for text colors using CSS variables */
+.text-foreground {
+  color: var(--foreground);
+}
+
+.text-foreground-secondary {
+  color: var(--foreground-secondary);
+}
+
+.text-foreground-tertiary {
+  color: var(--foreground-tertiary);
+}
+
+/* Default text color - elements inherit from parent, body sets the base */
+/* Most text elements will naturally inherit from body's color set above */
+
+/* Secondary text for labels, descriptions, etc. */
+.text-secondary {
+  color: var(--foreground-secondary);
+}
+
+/* Tertiary text for muted content */
+.text-tertiary {
+  color: var(--foreground-tertiary);
+}
+
+/* Buttons should inherit text color, but allow explicit overrides */
+/* Don't force a default color on all buttons - let them use explicit classes */
