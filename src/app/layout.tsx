@@ -57,7 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
         <ThemeProvider>
-          {children}
+          {props.children}
         </ThemeProvider>
       </body>
     </html>
