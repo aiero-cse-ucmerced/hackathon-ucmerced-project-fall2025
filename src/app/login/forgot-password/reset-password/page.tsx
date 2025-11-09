@@ -31,17 +31,56 @@ export default function ResetPasswordPage() {
   return (
     <div className="w-full max-w-md space-y-8 p-8">
       <div className="text-center">
+<<<<<<< HEAD:src/app/login/signup/page.tsx
+        <h1 className="text-3xl font-bold">
+          Intelligent Flashcards
+        </h1>
+        <p className="mt-2 text-sm text-secondary">
+          Create your account
+=======
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Reset Password
         </h1>
         <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           Set your new password.
+>>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c:src/app/login/forgot-password/reset-password/page.tsx
         </p>
       </div>
 
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div>
+<<<<<<< HEAD:src/app/login/signup/page.tsx
+            <label htmlFor="email" className="block text-sm font-medium">
+              Email address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium">
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
+=======
             <label htmlFor="new-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               New Password
             </label>
@@ -54,13 +93,19 @@ export default function ResetPasswordPage() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
+>>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c:src/app/login/forgot-password/reset-password/page.tsx
               placeholder="••••••••"
             />
           </div>
 
           <div>
+<<<<<<< HEAD:src/app/login/signup/page.tsx
+            <label htmlFor="confirm-password" className="block text-sm font-medium">
+              Confirm Password
+=======
             <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Confirm New Password
+>>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c:src/app/login/forgot-password/reset-password/page.tsx
             </label>
             <input
               id="confirm-password"
@@ -70,7 +115,7 @@ export default function ResetPasswordPage() {
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
               placeholder="••••••••"
             />
           </div>
@@ -80,11 +125,23 @@ export default function ResetPasswordPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 dark:bg-teal-500 hover:bg-blue-700 dark:hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading ? "Resetting..." : "Confirm Reset"}
           </button>
         </div>
+<<<<<<< HEAD:src/app/login/signup/page.tsx
+
+        <div className="text-center text-sm">
+          <span className="text-secondary">
+            Already have an account?{" "}
+          </span>
+          <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
+            Sign in
+          </Link>
+        </div>
+=======
+>>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c:src/app/login/forgot-password/reset-password/page.tsx
       </form>
     </div>
   );
