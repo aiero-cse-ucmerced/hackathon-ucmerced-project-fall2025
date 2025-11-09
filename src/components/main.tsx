@@ -1,11 +1,15 @@
 import Header from "../components/header";
+import React from "react";
+import { User } from "firebase/auth";
 
 interface Props {
+    initialUser?: User;
     includeHeader?: boolean;
     children?: React.ReactNode;
     centerChildren?: boolean;
     className?: string;
 }
+
 
 export default function Main(props: Props) {
     return (<>
