@@ -78,7 +78,7 @@ export default function LoginPage() {
           </div>
 
           <div className="text-sm">
-            <a href="#" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
+            <a href="/login/forgot-password" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
               Forgot password?
             </a>
           </div>
@@ -93,6 +93,7 @@ export default function LoginPage() {
             {isLoading ? "Signing in..." : "Sign in"}
           </button>
         </div>
+
 
         <div className="text-center text-sm">
           <span className="text-gray-600 dark:text-gray-400">
