@@ -13,7 +13,7 @@ export default function LoginPage() {
     setIsLoading(true);
     login(email, password).then(() => {
       setIsLoading(false);
-      window.location.href = "/flashcards";
+      window.location.href = "/home";
     });
   };
 

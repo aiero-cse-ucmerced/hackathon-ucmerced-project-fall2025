@@ -17,7 +17,7 @@ export default function Home() {
         height={200}
       />
       {user ? (
-        <Button href="/flashcards" cta>Go to Dashboard</Button>
+        <Button href="/home" cta>Go to Dashboard</Button>
       ) : (
         <>
           <Button href="/signup" cta>Create Flashcards Now</Button>

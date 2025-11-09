@@ -18,7 +18,7 @@ export default function SignUpPage() {
     setError("");
     signUp(email, password).then(() => {
       setIsLoading(false);
-      window.location.href = "/flashcards";
+      window.location.href = "/home";
     }).catch((err) => {
       setError(err.message);
       setIsLoading(false);
