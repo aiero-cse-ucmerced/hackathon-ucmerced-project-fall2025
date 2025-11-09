@@ -10,7 +10,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ isOn, handleToggle }) => {
     <button
       onClick={handleToggle}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
-        isOn ? 'bg-blue-600' : 'bg-gray-200'
+        isOn ? 'bg-blue-600 dark:bg-blue-500' : 'bg-gray-200 dark:bg-gray-700'
       }`}
     >
       <span

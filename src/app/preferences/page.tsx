@@ -48,7 +48,9 @@ const PreferencesPage = () => {
         <div className="flex space-x-2 mt-4 overflow-x-auto scrollbar-hide">
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'account' ? 'bg-blue-900 text-white' : 'bg-gray-200 dark:bg-gray-700'
+              activeTab === 'account' 
+                ? 'bg-blue-600 dark:bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-200 text-gray-900 dark:text-gray-900'
             }`}
             onClick={() => setActiveTab('account')}
           >
@@ -59,7 +61,9 @@ const PreferencesPage = () => {
           </button>
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'customize' ? 'bg-blue-900 text-white' : 'bg-gray-200 text-gray-700'
+              activeTab === 'customize' 
+                ? 'bg-blue-600 dark:bg-white text-white dark:text-gray-900' 
+                : 'bg-gray-200 dark:bg-gray-200 text-gray-900 dark:text-gray-900'
             }`}
             onClick={() => setActiveTab('customize')}
           >
@@ -70,7 +74,9 @@ const PreferencesPage = () => {
           </button>
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'mobile' ? 'bg-blue-900 text-white' : 'bg-gray-200 text-gray-700'
+              activeTab === 'mobile' 
+                ? 'bg-blue-600 dark:bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-200 text-gray-900 dark:text-gray-900'
             }`}
             onClick={() => setActiveTab('mobile')}
           >
@@ -81,7 +87,9 @@ const PreferencesPage = () => {
           </button>
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'email' ? 'bg-blue-900 text-white' : 'bg-gray-200 text-gray-700'
+              activeTab === 'email' 
+                ? 'bg-blue-600 dark:bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-200 text-gray-900 dark:text-gray-900'
             }`}
             onClick={() => setActiveTab('email')}
           >
@@ -92,7 +100,9 @@ const PreferencesPage = () => {
           </button>
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'plan' ? 'bg-blue-900 text-white' : 'bg-gray-200 text-gray-700'
+              activeTab === 'plan' 
+                ? 'bg-blue-600 dark:bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-200 text-gray-900 dark:text-gray-900'
             }`}
             onClick={() => setActiveTab('plan')}
           >
@@ -114,7 +124,7 @@ const PreferencesPage = () => {
               <p className="text-secondary text-sm">Email</p>
             </div>
             <Link href="/preferences/account/name">
-              <button className="ml-auto text-blue-600 text-sm">Change</button>
+              <button className="ml-auto text-sm">Change</button>
             </Link>
           </div>
   
@@ -124,7 +134,7 @@ const PreferencesPage = () => {
             <div className="flex items-center">
               <p className="text-secondary mr-4">your_username</p>
               <Link href="/preferences/account/username">
-                <button className="text-blue-600 text-sm">Change</button>
+                <button className="text-sm">Change</button>
               </Link>
             </div>
           </div>
@@ -133,7 +143,7 @@ const PreferencesPage = () => {
             <div className="flex items-center">
               <p className="text-secondary mr-4">your_email@example.com</p>
               <Link href="/preferences/account/email">
-                <button className="text-blue-600 text-sm">Change</button>
+                <button className="text-sm">Change</button>
               </Link>
             </div>
           </div>
@@ -141,7 +151,7 @@ const PreferencesPage = () => {
             <p>Connected account</p>
             <div className="flex items-center">
               <p className="text-secondary mr-4">Currently signed in with this account.</p>
-              <button className="text-blue-600 text-sm">Google sign in</button>
+              <button className="text-sm">Google sign in</button>
             </div>
           </div>
         </section>
@@ -153,7 +163,7 @@ const PreferencesPage = () => {
           <h3 className="text-lg font-medium mb-2">Select cover image</h3>
           <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Upload photo</p>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm">Upload photo</button>
+            <button className="bg-blue-500 dark:bg-teal-500 text-white px-4 py-2 rounded-full text-sm hover:bg-blue-600 dark:hover:bg-teal-600 transition-colors">Upload photo</button>
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Select cover color</h3>
@@ -242,7 +252,7 @@ const PreferencesPage = () => {
           </div>
           <div className="flex justify-between items-center py-2">
             <p>When should we notify you?</p>
-            <button className="text-blue-600 text-sm">Pick a time</button>
+            <button className="text-sm">Pick a time</button>
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Alerts</h3>
@@ -306,7 +316,7 @@ const PreferencesPage = () => {
           </div>
           <div className="flex justify-between items-center py-2">
             <p>When should we notify you?</p>
-            <button className="text-blue-600 text-sm">Pick a time</button>
+            <button className="text-sm">Pick a time</button>
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Alerts</h3>

@@ -68,3 +68,6 @@ body {
 .text-tertiary {
   color: var(--foreground-tertiary);
 }
+
+/* Buttons should inherit text color, but allow explicit overrides */
+/* Don't force a default color on all buttons - let them use explicit classes */

@@ -1,21 +1,43 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import CategoryFilter from '../../components/CategoryFilter';
 import RecommendationCard from '../../components/RecommendationCard';
-import { allFlashcards } from '../../data/flashcards';
+import { searchFlashcards, Flashcard } from '../../lib/firebaseService';
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('School');
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredFlashcards, setFilteredFlashcards] = useState<Flashcard[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Filter flashcards based on search term and category
-  const filteredFlashcards = useMemo(() => {
-    return allFlashcards.filter(card => {
-      const matchesSearch = card.title.toLowerCase().includes(searchTerm.toLowerCase());
-      return matchesSearch;
-    });
+  // Search flashcards when searchTerm changes
+  useEffect(() => {
+    const performSearch = async () => {
+      if (!searchTerm.trim()) {
+        setFilteredFlashcards([]);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const results = await searchFlashcards(searchTerm);
+        setFilteredFlashcards(results);
+      } catch (err) {
+        console.error('Search error:', err);
+        setFilteredFlashcards([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // Debounce search to avoid too many requests
+    const timeoutId = setTimeout(() => {
+      performSearch();
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
   return (
@@ -58,7 +80,7 @@ const HomePage = () => {
               </button>
             )}
           </div>
-          {searchTerm && filteredFlashcards.length > 0 && (
+          {searchTerm && !isLoading && filteredFlashcards.length > 0 && (
             <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg z-10 mt-1 max-h-64 overflow-y-auto">
               {filteredFlashcards.map((card) => (
                 <Link key={card.id} href={`/search?q=${encodeURIComponent(card.title)}`}>
@@ -70,16 +92,21 @@ const HomePage = () => {
               ))}
             </div>
           )}
+          {searchTerm && isLoading && (
+            <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg z-10 mt-1 p-3">
+              <p className="text-sm text-secondary">Searching...</p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Continue where you left off */}
       <section className="p-4">
           <h2 className="text-xl font-medium mb-4">Continue where you left off</h2>
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 flex justify-between items-center shadow-md">
+        <div className="bg-gray-100 dark:bg-gray-200 rounded-lg p-4 flex justify-between items-center shadow-md">
           <div>
             <span className="bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">50% Progress</span>
-            <p className="mt-2 text-lg">Ut enim ad minim veniam</p>
+            <p className="mt-2 text-lg text-gray-900 dark:text-gray-900">Ut enim ad minim veniam</p>
           </div>
           <button className="text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -105,7 +132,7 @@ const HomePage = () => {
                 <RecommendationCard
                   title="DMV Permit Test"
                   tags={[
-                    { text: '# Driving', color: 'bg-gray-200 text-gray-700' },
+                    { text: '# Driving', color: 'bg-gray-300 dark:bg-gray-300 text-gray-900 dark:text-gray-900' },
                     {
                       text: 'Top Pick',
                       color: 'bg-green-200 text-green-800',
@@ -120,7 +147,7 @@ const HomePage = () => {
                 <RecommendationCard
                   title="DMV Permit Test"
                   tags={[
-                    { text: '# Driving', color: 'bg-gray-200 text-gray-700' },
+                    { text: '# Driving', color: 'bg-gray-300 dark:bg-gray-300 text-gray-900 dark:text-gray-900' },
                     {
                       text: 'Top Pick',
                       color: 'bg-green-200 text-green-800',
@@ -174,14 +201,14 @@ const HomePage = () => {
             <RecommendationCard
               title="Introduction to Physics"
               tags={[
-                { text: '# Science', color: 'bg-gray-200 text-gray-700' },
+                { text: '# Science', color: 'bg-gray-300 dark:bg-gray-300 text-gray-900 dark:text-gray-900' },
                 { text: 'New', color: 'bg-yellow-200 text-yellow-800' },
               ]}
             />
             <RecommendationCard
               title="Drawing Fundamentals"
               tags={[
-                { text: '# Art', color: 'bg-gray-200 text-gray-700' },
+                { text: '# Art', color: 'bg-gray-300 dark:bg-gray-300 text-gray-900 dark:text-gray-900' },
                 { text: 'Popular', color: 'bg-red-200 text-red-800' },
               ]}
             />
@@ -198,7 +225,7 @@ const HomePage = () => {
           </svg>
         </button>
         </Link>
-        <button className="bg-blue-500 text-white p-3 rounded-full shadow-lg">
+        <button className="bg-blue-500 dark:bg-teal-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 dark:hover:bg-teal-600 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>

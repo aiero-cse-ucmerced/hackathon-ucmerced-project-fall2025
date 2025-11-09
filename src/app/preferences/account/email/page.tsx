@@ -57,10 +57,10 @@ const ChangeEmailPage = () => {
         <button
           onClick={handleUpdate}
           disabled={isLoading || success}
-          className={`mt-6 w-full p-3 rounded-lg text-lg font-medium transition ${
+              className={`mt-6 w-full p-3 rounded-lg text-lg font-medium transition ${
             isLoading || success
-              ? 'bg-gray-400 text-white cursor-not-allowed'
-              : 'bg-blue-500 text-white hover:bg-blue-600 active:scale-95'
+              ? 'bg-gray-400 dark:bg-gray-600 text-white cursor-not-allowed'
+              : 'bg-blue-500 dark:bg-teal-500 text-white hover:bg-blue-600 dark:hover:bg-teal-600 active:scale-95'
           }`}
         >
           {isLoading ? 'Updating...' : success ? 'Updated!' : 'Update my email'}
