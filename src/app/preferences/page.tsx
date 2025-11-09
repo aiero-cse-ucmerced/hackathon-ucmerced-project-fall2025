@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import Link from 'next/link';
 import { useTheme } from '../../components/ThemeProvider';
+import { auth } from '../../lib/firebase/clientApp';
+import { useUser } from '../../components/firebase';
+import { updateProfile, updateEmail } from 'firebase/auth';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../lib/firebase/clientApp';
+import { signInWithPopup, GoogleAuthProvider, linkWithCredential } from 'firebase/auth';
 
 const PreferencesPage = () => {
   const [activeTab, setActiveTab] = useState('account'); // 'account', 'customize', 'mobile', 'email', 'plan'

@@ -229,7 +229,7 @@ const HomePage = () => {
           </div>
           <div className="grid grid-cols-1 gap-4">
             {getFilteredDecks().slice(0, 6).map((deck) => (
-              <Link key={deck.id} href={`/search?q=${encodeURIComponent(deck.title)}`}>
+              <Link key={deck.id} href={`/study/${deck.id}`}>
                 <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-100 dark:border-gray-700">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">

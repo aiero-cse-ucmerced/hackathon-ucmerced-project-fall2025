@@ -200,6 +200,42 @@ export async function getFlashcardById(id: string): Promise<Flashcard | null> {
   }
 }
 
+/**
+ * Get a flashcard set by ID (includes flashcards array)
+ * @param id - The flashcard set ID
+ * @returns Promise<FlashcardSet | null>
+ */
+export async function getFlashcardSetById(id: string): Promise<FlashcardSet | null> {
+  if (!db) {
+    console.error('Firestore not initialized');
+    return null;
+  }
+
+  try {
+    const flashcardRef = doc(db, FLASHCARDS_COLLECTION, id);
+    const docSnapshot = await getDoc(flashcardRef);
+    
+    if (!docSnapshot.exists()) {
+      return null;
+    }
+
+    const data = docSnapshot.data();
+    
+    return {
+      id: docSnapshot.id,
+      title: data.title,
+      category: data.category || 'General',
+      flashcards: data.flashcards || [],
+      userId: data.userId || null,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    };
+  } catch (error) {
+    console.error('Error fetching flashcard set by ID:', error);
+    return null;
+  }
+}
+
 export interface FlashcardItem {
   word: string;
   definition: string;
