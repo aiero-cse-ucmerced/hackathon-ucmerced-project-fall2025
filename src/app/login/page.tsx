@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { login } from "@/lib/firebase/auth";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,15 +11,9 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // TODO: Implement authentication logic here
-    console.log("Login attempt:", { email, password });
-    
-    // Simulate API call
-    setTimeout(() => {
+    login(email, password).then(() => {
       setIsLoading(false);
-      alert("Login functionality to be implemented");
-    }, 1000);
+    });
   };
 
   return (
@@ -104,7 +99,7 @@ export default function LoginPage() {
           <span className="text-gray-600 dark:text-gray-400">
             Don't have an account?{" "}
           </span>
-          <a href="/login/signup" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
+          <a href="/signup" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
             Sign up
           </a>
         </div>
