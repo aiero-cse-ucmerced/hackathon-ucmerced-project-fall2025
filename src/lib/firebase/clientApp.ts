@@ -14,14 +14,8 @@ const firebaseConfig = {
     appId: "1:145593178509:web:50b83b138f71ddec4785c4"
 };
 
-
-// Use automatic initialization
-// https://firebase.google.com/docs/app-hosting/firebase-sdks#initialize-with-no-arguments
 export const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);
 export const storage = getStorage(firebaseApp);
-
-console.log("Firebase initialized on client");
-console.dir(auth);
