@@ -19,14 +19,7 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export const metadata: Metadata = {
-  title: "Intelligent Flashcards",
-  description: "Learn with intelligent flashcards",
-};
-
-export default function RootLayout({
-  children,
-}: {
+export default function Layout(props: {
   children: React.ReactNode;
 }) {
   return (
