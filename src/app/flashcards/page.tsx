@@ -20,14 +20,24 @@ export default function CreateFlashcardSet() {
   const [success, setSuccess] = useState(false);
 
   const handleAddFlashcard = () => {
-    if (word.trim() && definition.trim()) {
-      setFlashcards([...flashcards, { word: word.trim(), definition: definition.trim() }]);
-      setWord("");
-      setDefinition("");
-      setError(""); // Clear any previous errors
-    } else {
-      setError("Please fill in both word and definition");
+    // Clear previous errors
+    setError("");
+    
+    // Validation
+    if (!word.trim()) {
+      setError("Please enter a word or term");
+      return;
     }
+    
+    if (!definition.trim()) {
+      setError("Please enter a definition");
+      return;
+    }
+    
+    // Add flashcard
+    setFlashcards([...flashcards, { word: word.trim(), definition: definition.trim() }]);
+    setWord("");
+    setDefinition("");
   };
 
   const handleRemoveFlashcard = (indexToRemove: number) => {

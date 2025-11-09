@@ -103,13 +103,14 @@ const SearchPage = () => {
                 {searchResults.length > 0 ? (
                   <div className="space-y-3">
                     {searchResults.map((result) => (
-                      <div
-                        key={result.id}
-                        className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-gray-800 transition cursor-pointer"
-                      >
-                        <h3 className="font-semibold text-lg">{result.title}</h3>
-                        <p className="text-sm text-secondary mt-1">Category: {result.category}</p>
-                      </div>
+                      <Link key={result.id} href={`/study/${result.id}`}>
+                        <div
+                          className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-gray-800 transition cursor-pointer"
+                        >
+                          <h3 className="font-semibold text-lg">{result.title}</h3>
+                          <p className="text-sm text-secondary mt-1">Category: {result.category}</p>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 ) : (
