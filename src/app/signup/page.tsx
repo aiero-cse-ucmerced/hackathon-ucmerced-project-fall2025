@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Main from "@/components/main";
-import { login } from "../../lib/firebase/auth";
+import { signUp } from "../../lib/firebase/auth";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -16,7 +16,13 @@ export default function SignUpPage() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    login(email, password);
+    signUp(email, password).then(() => {
+      setIsLoading(false);
+      window.location.href = "/flashcards";
+    }).catch((err) => {
+      setError(err.message);
+      setIsLoading(false);
+    });
   }
   return (
     <Main centerChildren>
