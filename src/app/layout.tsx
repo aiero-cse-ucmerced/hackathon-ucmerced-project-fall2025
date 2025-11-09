@@ -25,6 +25,9 @@ interface Props {
 export default function Layout(props?: Props) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
