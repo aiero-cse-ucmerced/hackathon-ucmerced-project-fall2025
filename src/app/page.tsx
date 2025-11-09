@@ -6,11 +6,10 @@ import Image from "next/image";
 import HeroImage from "../images/student.png";
 import Button from "../components/button";
 import Main from "../components/main";
-import { useUserSession } from "../lib/useUserSession";
-import { auth } from "../lib/firebase/clientApp";
+import { useUser } from "../components/firebase";
 
 export default function Home() {
-  const user = useUserSession(auth.currentUser);
+  const user = useUser();
   return (
 <<<<<<< HEAD
     <>
@@ -29,7 +28,7 @@ export default function Home() {
     </>
 =======
       {user ? (
-        <Button href="/home" cta>Go to Dashboard</Button>
+        <Button href="/flashcards" cta>Go to Dashboard</Button>
       ) : (
         <>
           <Button href="/signup" cta>Create Flashcards Now</Button>
