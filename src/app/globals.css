@@ -17,7 +17,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-<<<<<<< HEAD
 /* Dark mode styles */
 .dark {
   --background: #111827;
@@ -35,14 +34,6 @@ html {
   color: var(--foreground);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
-=======
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
->>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c
 
 body {
   background: var(--background);
