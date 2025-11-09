@@ -26,8 +26,7 @@ export default function Home() {
             <Button href="/login">Login</Button>
           </section>
         </>
-      )
-      }
-    </Main >
+      )}
+    </Main>
   );
 }

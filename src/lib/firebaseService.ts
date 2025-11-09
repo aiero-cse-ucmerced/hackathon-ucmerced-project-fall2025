@@ -6,9 +6,12 @@ import {
   getDoc,
   doc,
   orderBy, 
-  limit
+  limit,
+  addDoc,
+  serverTimestamp
 } from 'firebase/firestore';
 import { db } from './firebase';
+import { auth } from './firebase/clientApp';
 
 export interface Flashcard {
   id: string;
@@ -193,6 +196,87 @@ export async function getFlashcardById(id: string): Promise<Flashcard | null> {
     };
   } catch (error) {
     console.error('Error fetching flashcard by ID:', error);
+    return null;
+  }
+}
+
+/**
+ * Get a flashcard set by ID (includes flashcards array)
+ * @param id - The flashcard set ID
+ * @returns Promise<FlashcardSet | null>
+ */
+export async function getFlashcardSetById(id: string): Promise<FlashcardSet | null> {
+  if (!db) {
+    console.error('Firestore not initialized');
+    return null;
+  }
+
+  try {
+    const flashcardRef = doc(db, FLASHCARDS_COLLECTION, id);
+    const docSnapshot = await getDoc(flashcardRef);
+    
+    if (!docSnapshot.exists()) {
+      return null;
+    }
+
+    const data = docSnapshot.data();
+    
+    return {
+      id: docSnapshot.id,
+      title: data.title,
+      category: data.category || 'General',
+      flashcards: data.flashcards || [],
+      userId: data.userId || null,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    };
+  } catch (error) {
+    console.error('Error fetching flashcard set by ID:', error);
+    return null;
+  }
+}
+
+export interface FlashcardItem {
+  word: string;
+  definition: string;
+}
+
+export interface FlashcardSet {
+  id?: string;
+  title: string;
+  category?: string;
+  flashcards: FlashcardItem[];
+  createdAt?: any;
+  updatedAt?: any;
+  userId?: string;
+}
+
+/**
+ * Create a new flashcard set in Firestore
+ * @param flashcardSet - The flashcard set to create
+ * @returns Promise<string> - The ID of the created document
+ */
+export async function createFlashcardSet(flashcardSet: Omit<FlashcardSet, 'id' | 'createdAt' | 'updatedAt'>): Promise<string | null> {
+  if (!db) {
+    console.error('Firestore not initialized');
+    return null;
+  }
+
+  try {
+    const user = auth.currentUser;
+    const flashcardSetData = {
+      title: flashcardSet.title,
+      category: flashcardSet.category || 'General',
+      flashcards: flashcardSet.flashcards,
+      userId: user?.uid || null,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
+
+    const docRef = await addDoc(collection(db, FLASHCARDS_COLLECTION), flashcardSetData);
+    return docRef.id;
+  } catch (error) {
+    console.error('Error creating flashcard set:', error);
     return null;
   }
 }

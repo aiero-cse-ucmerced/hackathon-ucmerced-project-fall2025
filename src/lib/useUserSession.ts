@@ -11,9 +11,9 @@ export function useUserSession(initialUser: User | null = null) {
         return onIdTokenChanged(async (user: User | null) => {
             if (user) {
                 const idToken = await user.getIdToken();
-                await setCookie("__session", idToken);
+                setCookie("__session", idToken);
             } else {
-                await deleteCookie("__session");
+                deleteCookie("__session");
             }
             if (initialUser?.uid === user?.uid) {
                 return;
