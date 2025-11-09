@@ -1,15 +1,25 @@
 # Environment Variables Setup
 
-This project uses Firebase Firestore for search functionality. You need to set up the following environment variables.
+This project uses Firebase for authentication, database, and storage. You need to set up environment variables in a `.env.local` file.
+
+## Quick Setup
+
+1. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. Fill in your Firebase configuration values (see below)
+
+3. Restart your development server
 
 ## Required Environment Variables
 
-Create a `.env.local` file in the root directory of your project with the following variables:
+Create a `.env.local` file in the root directory with the following variables:
 
 ```env
 # Firebase Configuration
-# Get these values from your Firebase project settings
-# https://console.firebase.google.com/
+# Get these values from Firebase Console → Project Settings → Your apps → Web app config
 
 NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
@@ -19,7 +29,6 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 
 # Firebase Firestore Collection Name
-# This is the collection name where flashcards are stored in Firestore
 NEXT_PUBLIC_FIREBASE_FLASHCARDS_COLLECTION=flashcards
 ```
 
@@ -33,48 +42,51 @@ NEXT_PUBLIC_FIREBASE_FLASHCARDS_COLLECTION=flashcards
 6. Click on the web app icon (</>)
 7. Copy the configuration values from the `firebaseConfig` object
 
-## Setting up Firestore
+## Example Configuration
 
-1. In Firebase Console, go to "Firestore Database"
-2. Create a database (start in test mode for development)
-3. Create a collection named `flashcards` (or update `NEXT_PUBLIC_FIREBASE_FLASHCARDS_COLLECTION` to match your collection name)
-4. Add documents with the following structure:
-   ```json
-   {
-     "title": "DMV Permit Test",
-     "category": "Driving"
-   }
-   ```
-
-## Firestore Indexing
-
-For better search performance, you may want to create composite indexes in Firestore:
-
-1. Go to Firestore Database → Indexes
-2. Create a composite index with:
-   - Collection: `flashcards` (or your collection name)
-   - Fields: `title` (Ascending), `category` (Ascending)
-
-Note: The current implementation uses client-side filtering for case-insensitive search. For production with large datasets, consider:
-- Using Algolia for full-text search
-- Storing lowercase versions of titles in a separate field
-- Using Cloud Functions for server-side search
-
-## Security Rules
-
-Make sure to set up proper Firestore security rules. For development, you can use:
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /flashcards/{document=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-  }
-}
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCY97F1PWgEkVgNn-yJPSea93Ym46qX1p8
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=gen-lang-client-0599013375.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=gen-lang-client-0599013375
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=gen-lang-client-0599013375.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=145593178509
+NEXT_PUBLIC_FIREBASE_APP_ID=1:145593178509:web:50b83b138f71ddec4785c4
+NEXT_PUBLIC_FIREBASE_FLASHCARDS_COLLECTION=flashcards
 ```
 
-For production, implement proper authentication and authorization rules.
+## Important Notes
 
+- **Never commit `.env.local` to version control** - it's already in `.gitignore`
+- Environment variables must start with `NEXT_PUBLIC_` to be accessible in the browser
+- Restart your development server after changing `.env.local`
+- For production, set these variables in your hosting platform's environment variable settings
+
+## Firebase Setup
+
+For complete Firebase setup instructions, see:
+- [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) - Detailed Firebase setup guide
+- [SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md) - Complete setup instructions
+
+## Troubleshooting
+
+### Environment variables not working?
+
+1. Make sure the file is named `.env.local` (not `.env`)
+2. Verify variables start with `NEXT_PUBLIC_`
+3. Restart your development server
+4. Check that the file is in the root directory
+5. Verify there are no syntax errors (no spaces around `=`)
+
+### Firebase errors?
+
+1. Check that all environment variables are set correctly
+2. Verify your Firebase project is properly configured
+3. See [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) for detailed setup instructions
+
+## Security
+
+- Keep your `.env.local` file secure
+- Never share your Firebase API keys publicly
+- Use different Firebase projects for development and production
+- Set up proper Firestore security rules
+- Enable Firebase App Check for production

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "../components/ThemeProvider";
@@ -19,9 +20,16 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export default function Layout(props: {
-  children: React.ReactNode;
-}) {
+export const metadata: Metadata = {
+  title: "Intelligent Flashcards",
+  description: "Learn with intelligent flashcards",
+};
+
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

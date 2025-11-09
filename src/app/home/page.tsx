@@ -3,11 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { searchFlashcards, getAllFlashcards, Flashcard } from '../../lib/firebaseService';
-import { useUserSession } from '../../lib/useUserSession';
-import { auth } from '../../lib/firebase/clientApp';
+import { useAuth } from '../../hooks/useAuth';
 
 const HomePage = () => {
-  const user = useUserSession(auth.currentUser);
+  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFlashcards, setFilteredFlashcards] = useState<Flashcard[]>([]);
   const [allFlashcards, setAllFlashcards] = useState<Flashcard[]>([]);
