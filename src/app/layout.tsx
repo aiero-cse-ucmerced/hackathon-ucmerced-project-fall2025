@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import Header from "../components/header";
 import ThemeProvider from "../components/ThemeProvider";
 
 const geistSans = Geist({
@@ -25,12 +24,11 @@ export const metadata: Metadata = {
   description: "Learn with intelligent flashcards",
 };
 
-interface Props {
-  includeHeader?: boolean;
-  children?: React.ReactNode;
-}
-
-export default function Layout(props?: Props) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -55,8 +53,7 @@ export default function Layout(props?: Props) {
           }}
         />
         <ThemeProvider>
-          {props?.includeHeader && <Header />}
-          <main>{props?.children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>

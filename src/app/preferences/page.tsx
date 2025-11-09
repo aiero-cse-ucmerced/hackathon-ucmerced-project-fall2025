@@ -39,16 +39,16 @@ const PreferencesPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen">
       <div className="p-4">
         <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">Manage all your preferences</p>
+        <p className="text-secondary text-sm mb-6">Manage all your preferences</p>
 
         {/* Navigation Tabs */}
         <div className="flex space-x-2 mt-4 overflow-x-auto scrollbar-hide">
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'account' ? 'bg-blue-900 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+              activeTab === 'account' ? 'bg-blue-900 text-white' : 'bg-gray-200 dark:bg-gray-700'
             }`}
             onClick={() => setActiveTab('account')}
           >
@@ -111,7 +111,7 @@ const PreferencesPage = () => {
             <img src="/images/student.png" alt="Profile" className="h-16 w-16 rounded-full mr-4" />
             <div>
               <p className="text-lg font-medium">Name</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">Email</p>
+              <p className="text-secondary text-sm">Email</p>
             </div>
             <Link href="/preferences/account/name">
               <button className="ml-auto text-blue-600 text-sm">Change</button>
@@ -119,19 +119,19 @@ const PreferencesPage = () => {
           </div>
   
           <h3 className="text-lg font-medium mb-2">Account Security</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Username</p>
             <div className="flex items-center">
-              <p className="text-gray-600 dark:text-gray-400 mr-4">your_username</p>
+              <p className="text-secondary mr-4">your_username</p>
               <Link href="/preferences/account/username">
                 <button className="text-blue-600 text-sm">Change</button>
               </Link>
             </div>
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Email</p>
             <div className="flex items-center">
-              <p className="text-gray-600 dark:text-gray-400 mr-4">your_email@example.com</p>
+              <p className="text-secondary mr-4">your_email@example.com</p>
               <Link href="/preferences/account/email">
                 <button className="text-blue-600 text-sm">Change</button>
               </Link>
@@ -140,7 +140,7 @@ const PreferencesPage = () => {
           <div className="flex justify-between items-center py-2">
             <p>Connected account</p>
             <div className="flex items-center">
-              <p className="text-gray-600 dark:text-gray-400 mr-4">Currently signed in with this account.</p>
+              <p className="text-secondary mr-4">Currently signed in with this account.</p>
               <button className="text-blue-600 text-sm">Google sign in</button>
             </div>
           </div>
@@ -151,7 +151,7 @@ const PreferencesPage = () => {
         <section className="p-4 mt-4">
           <h2 className="text-xl font-medium mb-4">Appearance</h2>
           <h3 className="text-lg font-medium mb-2">Select cover image</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Upload photo</p>
             <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm">Upload photo</button>
           </div>
@@ -171,24 +171,24 @@ const PreferencesPage = () => {
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Page Settings</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Select a default page</p>
-            <select className="border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 rounded-md p-1 text-sm">
+            <select className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md p-1 text-sm focus:outline-none">
               <option>Home</option>
               <option>Dashboard</option>
             </select>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">This page will be the default page you land on when logged in.</p>
+          <p className="text-secondary text-sm mt-1">This page will be the default page you land on when logged in.</p>
 
-          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700 mt-4">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 mt-4">
             <p>Enable hover for side navigation</p>
             <ToggleSwitch isOn={enableHover} handleToggle={() => setEnableHover(!enableHover)} />
           </div>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">This expands the side navigation on hover.</p>
+          <p className="text-secondary text-sm mt-1">This expands the side navigation on hover.</p>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Theme</h3>
           <div className="space-y-2">
-            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded">
+            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded text-secondary">
               <input
                 type="radio"
                 name="theme"
@@ -199,7 +199,7 @@ const PreferencesPage = () => {
               />
               <span>Light</span>
             </label>
-            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded">
+            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded text-secondary">
               <input
                 type="radio"
                 name="theme"
@@ -210,7 +210,7 @@ const PreferencesPage = () => {
               />
               <span>Dark</span>
             </label>
-            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded">
+            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded text-secondary">
               <input
                 type="radio"
                 name="theme"

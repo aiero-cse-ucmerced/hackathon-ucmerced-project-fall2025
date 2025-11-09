@@ -26,10 +26,10 @@ const ChangeNamePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 p-4 font-poppins">
+    <div className="min-h-screen p-4 font-poppins">
       <div className="flex items-center mb-8">
         <Link href="/preferences">
-          <button className="text-gray-600 mr-4 hover:text-gray-800">
+          <button className="text-secondary mr-4 hover:opacity-80">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -39,13 +39,13 @@ const ChangeNamePage = () => {
       </div>
 
       <div className="max-w-md mx-auto">
-        <label htmlFor="newName" className="block text-lg font-medium text-gray-700 mb-2">
+        <label htmlFor="newName" className="block text-lg font-medium mb-2">
           Enter the new name
         </label>
         <input
           type="text"
           id="newName"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Enter the new name"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}

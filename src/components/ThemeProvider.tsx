@@ -110,11 +110,8 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     applyTheme(newTheme);
   }, [applyTheme]);
 
-  // Prevent flash of unstyled content
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // Always provide the context, even before mount, to prevent errors
+  // The context value will be updated once mounted
   return (
     <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
       {children}

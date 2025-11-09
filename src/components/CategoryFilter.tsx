@@ -13,7 +13,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, onSelectCat
         <button
           key={category}
           className={`px-4 py-2 rounded-full ${
-            selectedCategory === category ? 'bg-blue-900 text-white' : 'bg-gray-200 text-gray-700'
+            selectedCategory === category ? 'bg-blue-900 text-white' : 'bg-gray-200 dark:bg-gray-700'
           }`}
           onClick={() => onSelectCategory(category)}
         >
