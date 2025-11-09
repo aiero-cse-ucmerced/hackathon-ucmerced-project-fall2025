@@ -1,47 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import Link from 'next/link';
+import { useTheme } from '../../components/ThemeProvider';
 
 const PreferencesPage = () => {
   const [activeTab, setActiveTab] = useState('account'); // 'account', 'customize', 'mobile', 'email', 'plan'
   const [emailNotifications, setEmailNotifications] = useState(false);
   const [mobileNotifications, setMobileNotifications] = useState(false);
-  const [theme, setTheme] = useState('light');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    applyTheme(savedTheme);
-  }, []);
-
-  const applyTheme = (selectedTheme: string) => {
-    const html = document.documentElement;
-    html.classList.remove('light', 'dark');
-    html.classList.add(selectedTheme);
-    
-    if (selectedTheme === 'dark') {
-      html.style.backgroundColor = '#1f2937';
-      html.style.color = '#f3f4f6';
-    } else if (selectedTheme === 'light') {
-      html.style.backgroundColor = '#ffffff';
-      html.style.color = '#111827';
-    } else if (selectedTheme === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark) {
-        html.classList.add('dark');
-        html.style.backgroundColor = '#1f2937';
-        html.style.color = '#f3f4f6';
-      } else {
-        html.classList.add('light');
-        html.style.backgroundColor = '#ffffff';
-        html.style.color = '#111827';
-      }
-    }
-  };
+  const { theme, setTheme } = useTheme();
   const [enableHover, setEnableHover] = useState(false);
   const [studyRemindersEmail, setStudyRemindersEmail] = useState(false);
   const [practiceNotificationsEmail, setPracticeNotificationsEmail] = useState(false);
@@ -71,16 +39,16 @@ const PreferencesPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <div className="p-4">
         <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-gray-600 text-sm mb-6">Manage all your preferences</p>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">Manage all your preferences</p>
 
         {/* Navigation Tabs */}
         <div className="flex space-x-2 mt-4 overflow-x-auto scrollbar-hide">
           <button
             className={`flex items-center px-4 py-2 rounded-full text-sm ${
-              activeTab === 'account' ? 'bg-blue-900 text-white' : 'bg-gray-200 text-gray-700'
+              activeTab === 'account' ? 'bg-blue-900 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
             }`}
             onClick={() => setActiveTab('account')}
           >
@@ -143,7 +111,7 @@ const PreferencesPage = () => {
             <img src="/images/student.png" alt="Profile" className="h-16 w-16 rounded-full mr-4" />
             <div>
               <p className="text-lg font-medium">Name</p>
-              <p className="text-gray-600 text-sm">Email</p>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Email</p>
             </div>
             <Link href="/preferences/account/name">
               <button className="ml-auto text-blue-600 text-sm">Change</button>
@@ -151,19 +119,19 @@ const PreferencesPage = () => {
           </div>
   
           <h3 className="text-lg font-medium mb-2">Account Security</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
             <p>Username</p>
             <div className="flex items-center">
-              <p className="text-gray-600 mr-4">your_username</p>
+              <p className="text-gray-600 dark:text-gray-400 mr-4">your_username</p>
               <Link href="/preferences/account/username">
                 <button className="text-blue-600 text-sm">Change</button>
               </Link>
             </div>
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
             <p>Email</p>
             <div className="flex items-center">
-              <p className="text-gray-600 mr-4">your_email@example.com</p>
+              <p className="text-gray-600 dark:text-gray-400 mr-4">your_email@example.com</p>
               <Link href="/preferences/account/email">
                 <button className="text-blue-600 text-sm">Change</button>
               </Link>
@@ -172,7 +140,7 @@ const PreferencesPage = () => {
           <div className="flex justify-between items-center py-2">
             <p>Connected account</p>
             <div className="flex items-center">
-              <p className="text-gray-600 mr-4">Currently signed in with this account.</p>
+              <p className="text-gray-600 dark:text-gray-400 mr-4">Currently signed in with this account.</p>
               <button className="text-blue-600 text-sm">Google sign in</button>
             </div>
           </div>
@@ -183,7 +151,7 @@ const PreferencesPage = () => {
         <section className="p-4 mt-4">
           <h2 className="text-xl font-medium mb-4">Appearance</h2>
           <h3 className="text-lg font-medium mb-2">Select cover image</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
             <p>Upload photo</p>
             <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm">Upload photo</button>
           </div>
@@ -203,89 +171,72 @@ const PreferencesPage = () => {
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Page Settings</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700">
             <p>Select a default page</p>
-            <select className="border rounded-md p-1 text-sm">
+            <select className="border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 rounded-md p-1 text-sm">
               <option>Home</option>
               <option>Dashboard</option>
             </select>
           </div>
-          <p className="text-gray-600 text-sm mt-1">This page will be the default page you land on when logged in.</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">This page will be the default page you land on when logged in.</p>
 
-          <div className="flex justify-between items-center py-2 border-b border-gray-200 mt-4">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700 dark:border-gray-700 mt-4">
             <p>Enable hover for side navigation</p>
             <ToggleSwitch isOn={enableHover} handleToggle={() => setEnableHover(!enableHover)} />
           </div>
-          <p className="text-gray-600 text-sm mt-1">This expands the side navigation on hover.</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">This expands the side navigation on hover.</p>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Theme</h3>
-          {mounted && (
-            <div className="space-y-2">
-              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="light"
-                  checked={theme === 'light'}
-                  onChange={() => {
-                    const newTheme = 'light';
-                    setTheme(newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    applyTheme(newTheme);
-                  }}
-                  className="mr-2"
-                />
-                <span>Light</span>
-              </label>
-              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="dark"
-                  checked={theme === 'dark'}
-                  onChange={() => {
-                    const newTheme = 'dark';
-                    setTheme(newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    applyTheme(newTheme);
-                  }}
-                  className="mr-2"
-                />
-                <span>Dark</span>
-              </label>
-              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="system"
-                  checked={theme === 'system'}
-                  onChange={() => {
-                    const newTheme = 'system';
-                    setTheme(newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    applyTheme(newTheme);
-                  }}
-                  className="mr-2"
-                />
-                <span>System</span>
-              </label>
-            </div>
-          )}
+          <div className="space-y-2">
+            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded">
+              <input
+                type="radio"
+                name="theme"
+                value="light"
+                checked={theme === 'light'}
+                onChange={() => setTheme('light')}
+                className="mr-2"
+              />
+              <span>Light</span>
+            </label>
+            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded">
+              <input
+                type="radio"
+                name="theme"
+                value="dark"
+                checked={theme === 'dark'}
+                onChange={() => setTheme('dark')}
+                className="mr-2"
+              />
+              <span>Dark</span>
+            </label>
+            <label className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded">
+              <input
+                type="radio"
+                name="theme"
+                value="system"
+                checked={theme === 'system'}
+                onChange={() => setTheme('system')}
+                className="mr-2"
+              />
+              <span>System</span>
+            </label>
+          </div>
         </section>
       )}
 
       {activeTab === 'email' && (
         <section className="p-4 mt-4">
           <h2 className="text-xl font-medium mb-4">Email Notification</h2>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Study Reminders</p>
             <ToggleSwitch isOn={studyRemindersEmail} handleToggle={() => setStudyRemindersEmail(!studyRemindersEmail)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Practice notifications</p>
             <ToggleSwitch isOn={practiceNotificationsEmail} handleToggle={() => setPracticeNotificationsEmail(!practiceNotificationsEmail)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Daily study reminders</p>
             <ToggleSwitch isOn={dailyStudyRemindersEmail} handleToggle={() => setDailyStudyRemindersEmail(!dailyStudyRemindersEmail)} />
           </div>
@@ -295,19 +246,19 @@ const PreferencesPage = () => {
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Alerts</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Streak reminder</p>
             <ToggleSwitch isOn={streakReminderEmail} handleToggle={() => setStreakReminderEmail(!streakReminderEmail)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Level & Progress</p>
             <ToggleSwitch isOn={levelProgressEmail} handleToggle={() => setLevelProgressEmail(!levelProgressEmail)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Inactivity Reminder</p>
             <ToggleSwitch isOn={inactivityReminderEmail} handleToggle={() => setInactivityReminderEmail(!inactivityReminderEmail)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Store Promotions</p>
             <ToggleSwitch isOn={storePromotionsEmail} handleToggle={() => setStorePromotionsEmail(!storePromotionsEmail)} />
           </div>
@@ -317,11 +268,11 @@ const PreferencesPage = () => {
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Friends</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>New follower</p>
             <ToggleSwitch isOn={newFollowerEmail} handleToggle={() => setNewFollowerEmail(!newFollowerEmail)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Friend activity</p>
             <ToggleSwitch isOn={friendActivityEmail} handleToggle={() => setFriendActivityEmail(!friendActivityEmail)} />
           </div>
@@ -341,15 +292,15 @@ const PreferencesPage = () => {
       {activeTab === 'mobile' && (
         <section className="p-4 mt-4">
           <h2 className="text-xl font-medium mb-4">Mobile Notification</h2>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Study Reminders</p>
             <ToggleSwitch isOn={studyRemindersMobile} handleToggle={() => setStudyRemindersMobile(!studyRemindersMobile)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Practice notifications</p>
             <ToggleSwitch isOn={practiceNotificationsMobile} handleToggle={() => setPracticeNotificationsMobile(!practiceNotificationsMobile)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Daily study reminders</p>
             <ToggleSwitch isOn={dailyStudyRemindersMobile} handleToggle={() => setDailyStudyRemindersMobile(!dailyStudyRemindersMobile)} />
           </div>
@@ -359,19 +310,19 @@ const PreferencesPage = () => {
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Alerts</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Streak reminder</p>
             <ToggleSwitch isOn={streakReminderMobile} handleToggle={() => setStreakReminderMobile(!streakReminderMobile)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Level & Progress</p>
             <ToggleSwitch isOn={levelProgressMobile} handleToggle={() => setLevelProgressMobile(!levelProgressMobile)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Inactivity Reminder</p>
             <ToggleSwitch isOn={inactivityReminderMobile} handleToggle={() => setInactivityReminderMobile(!inactivityReminderMobile)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Store Promotions</p>
             <ToggleSwitch isOn={storePromotionsMobile} handleToggle={() => setStorePromotionsMobile(!storePromotionsMobile)} />
           </div>
@@ -381,11 +332,11 @@ const PreferencesPage = () => {
           </div>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Friends</h3>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>New follower</p>
             <ToggleSwitch isOn={newFollowerMobile} handleToggle={() => setNewFollowerMobile(!newFollowerMobile)} />
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <div className="flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700">
             <p>Friend activity</p>
             <ToggleSwitch isOn={friendActivityMobile} handleToggle={() => setFriendActivityMobile(!friendActivityMobile)} />
           </div>
