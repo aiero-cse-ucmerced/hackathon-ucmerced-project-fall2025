@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
@@ -40,11 +44,20 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# package lock
 package-lock.json
 
-<<<<<<< HEAD
-.roo/
-.roomodes
-=======
-~$Intelligent Flashcards Presentation.pptx
->>>>>>> 9211fb8010dcb4a5f302f5118b16a6575d505d3c
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Presentation files
+*.pptx
+*.ppt

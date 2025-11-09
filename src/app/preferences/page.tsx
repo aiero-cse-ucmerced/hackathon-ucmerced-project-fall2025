@@ -4,15 +4,15 @@ import React, { useState, useEffect } from 'react';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import Link from 'next/link';
 import { useTheme } from '../../components/ThemeProvider';
-import { auth } from '../../lib/firebase/clientApp';
-import { useUser } from '../../components/firebase';
+import { useAuth } from '../../hooks/useAuth';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../../lib/firebase/clientApp';
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../lib/firebase/clientApp';
 
 const PreferencesPage = () => {
   const [activeTab, setActiveTab] = useState('account');
-  const user = useUser();
+  const { user } = useAuth();
   const { theme, setTheme } = useTheme();
   const [enableHover, setEnableHover] = useState(false);
   const [selectedColor, setSelectedColor] = useState('gray-800');

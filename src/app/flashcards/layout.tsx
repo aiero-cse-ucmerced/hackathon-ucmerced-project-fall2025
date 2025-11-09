@@ -1,12 +1,15 @@
 import React from 'react';
 import AuthGuard from '../../components/AuthGuard';
 
-const HomeLayout = ({ children }: { children: React.ReactNode }) => {
+export default function FlashcardsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <AuthGuard>
       {children}
     </AuthGuard>
   );
-};
+}
 
-export default HomeLayout;
