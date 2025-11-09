@@ -49,7 +49,7 @@ export default function Layout(props: {
           }}
         />
         <ThemeProvider>
-          {children}
+          {props.children}
         </ThemeProvider>
       </body>
     </html>
