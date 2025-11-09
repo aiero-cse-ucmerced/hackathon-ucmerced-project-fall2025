@@ -1,12 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import CategoryFilter from '../../components/CategoryFilter';
 import RecommendationCard from '../../components/RecommendationCard';
+import { allFlashcards } from '../../data/flashcards';
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('School');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter flashcards based on search term and category
+  const filteredFlashcards = useMemo(() => {
+    return allFlashcards.filter(card => {
+      const matchesSearch = card.title.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesSearch;
+    });
+  }, [searchTerm]);
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
@@ -22,6 +32,46 @@ const HomePage = () => {
           </button>
         </Link>
       </header>
+
+      {/* Interactive Search Bar */}
+      <section className="px-4 py-2">
+        <div className="relative">
+          <div className="relative mb-2">
+            <input
+              type="text"
+              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Search flashcards..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute left-3 top-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            {searchTerm && (
+              <button
+                className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                onClick={() => setSearchTerm('')}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+          {searchTerm && filteredFlashcards.length > 0 && (
+            <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg z-10 mt-1 max-h-64 overflow-y-auto">
+              {filteredFlashcards.map((card) => (
+                <Link key={card.id} href={`/search?q=${encodeURIComponent(card.title)}`}>
+                  <div className="p-3 border-b border-gray-200 hover:bg-blue-50 cursor-pointer transition">
+                    <p className="font-semibold text-sm text-gray-900">{card.title}</p>
+                    <p className="text-xs text-gray-600">{card.category}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Continue where you left off */}
       <section className="p-4">
@@ -40,72 +90,104 @@ const HomePage = () => {
       </section>
 
       {/* Recommendations */}
-      <section className="p-4">
-        <h2 className="text-xl font-medium mb-4">Recommendations</h2>
-        <CategoryFilter
-          categories={['School', 'Languages']}
-          onSelectCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-        />
+      {!searchTerm && (
+        <section className="p-4">
+          <h2 className="text-xl font-medium mb-4">Recommendations</h2>
+          <CategoryFilter
+            categories={['School', 'Languages']}
+            onSelectCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+          />
 
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
-          {selectedCategory === 'School' && (
-            <>
-              <RecommendationCard
-                title="DMV Permit Test"
-                tags={[
-                  { text: '# Driving', color: 'bg-gray-200 text-gray-700' },
-                  {
-                    text: 'Top Pick',
-                    color: 'bg-green-200 text-green-800',
-                    icon: (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    ),
-                  },
-                ]}
-              />
-              <RecommendationCard
-                title="DMV Permit Test"
-                tags={[
-                  { text: '# Driving', color: 'bg-gray-200 text-gray-700' },
-                  {
-                    text: 'Top Pick',
-                    color: 'bg-green-200 text-green-800',
-                    icon: (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    ),
-                  },
-                ]}
-              />
-            </>
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
+            {selectedCategory === 'School' && (
+              <>
+                <RecommendationCard
+                  title="DMV Permit Test"
+                  tags={[
+                    { text: '# Driving', color: 'bg-gray-200 text-gray-700' },
+                    {
+                      text: 'Top Pick',
+                      color: 'bg-green-200 text-green-800',
+                      icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      ),
+                    },
+                  ]}
+                />
+                <RecommendationCard
+                  title="DMV Permit Test"
+                  tags={[
+                    { text: '# Driving', color: 'bg-gray-200 text-gray-700' },
+                    {
+                      text: 'Top Pick',
+                      color: 'bg-green-200 text-green-800',
+                      icon: (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      ),
+                    },
+                  ]}
+                />
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Search Results */}
+      {searchTerm && (
+        <section className="p-4 mt-4">
+          <h2 className="text-xl font-medium mb-4">
+            Search Results {filteredFlashcards.length > 0 && `(${filteredFlashcards.length})`}
+          </h2>
+          {filteredFlashcards.length > 0 ? (
+            <div className="space-y-3">
+              {filteredFlashcards.map((card) => (
+                <Link key={card.id} href={`/search?q=${encodeURIComponent(card.title)}`}>
+                  <div className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition cursor-pointer">
+                    <h3 className="font-semibold text-lg text-gray-900">{card.title}</h3>
+                    <p className="text-sm text-gray-600 mt-1">Category: {card.category}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <p className="text-gray-500">No flashcards found matching "{searchTerm}"</p>
+            </div>
           )}
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* More for you */}
-      <section className="p-4 mt-4">
-        <h2 className="text-xl font-medium mb-4">More for you</h2>
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
-          <RecommendationCard
-            title="Introduction to Physics"
-            tags={[
-              { text: '# Science', color: 'bg-gray-200 text-gray-700' },
-              { text: 'New', color: 'bg-yellow-200 text-yellow-800' },
-            ]}
-          />
-          <RecommendationCard
-            title="Drawing Fundamentals"
-            tags={[
-              { text: '# Art', color: 'bg-gray-200 text-gray-700' },
-              { text: 'Popular', color: 'bg-red-200 text-red-800' },
-            ]}
-          />
-        </div>
-      </section>
+      {/* More for you - only show when not searching */}
+      {!searchTerm && (
+        <section className="p-4 mt-4">
+          <h2 className="text-xl font-medium mb-4">More for you</h2>
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
+            <RecommendationCard
+              title="Introduction to Physics"
+              tags={[
+                { text: '# Science', color: 'bg-gray-200 text-gray-700' },
+                { text: 'New', color: 'bg-yellow-200 text-yellow-800' },
+              ]}
+            />
+            <RecommendationCard
+              title="Drawing Fundamentals"
+              tags={[
+                { text: '# Art', color: 'bg-gray-200 text-gray-700' },
+                { text: 'Popular', color: 'bg-red-200 text-red-800' },
+              ]}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 flex justify-around items-center">

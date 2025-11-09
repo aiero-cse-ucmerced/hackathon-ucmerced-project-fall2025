@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import Link from 'next/link';
 
@@ -8,12 +8,40 @@ const PreferencesPage = () => {
   const [activeTab, setActiveTab] = useState('account'); // 'account', 'customize', 'mobile', 'email', 'plan'
   const [emailNotifications, setEmailNotifications] = useState(false);
   const [mobileNotifications, setMobileNotifications] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'light';
+  const [theme, setTheme] = useState('light');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    applyTheme(savedTheme);
+  }, []);
+
+  const applyTheme = (selectedTheme: string) => {
+    const html = document.documentElement;
+    html.classList.remove('light', 'dark');
+    html.classList.add(selectedTheme);
+    
+    if (selectedTheme === 'dark') {
+      html.style.backgroundColor = '#1f2937';
+      html.style.color = '#f3f4f6';
+    } else if (selectedTheme === 'light') {
+      html.style.backgroundColor = '#ffffff';
+      html.style.color = '#111827';
+    } else if (selectedTheme === 'system') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        html.classList.add('dark');
+        html.style.backgroundColor = '#1f2937';
+        html.style.color = '#f3f4f6';
+      } else {
+        html.classList.add('light');
+        html.style.backgroundColor = '#ffffff';
+        html.style.color = '#111827';
+      }
     }
-    return 'light';
-  }); // 'light', 'dark', 'system'
+  };
   const [enableHover, setEnableHover] = useState(false);
   const [studyRemindersEmail, setStudyRemindersEmail] = useState(false);
   const [practiceNotificationsEmail, setPracticeNotificationsEmail] = useState(false);
@@ -46,7 +74,7 @@ const PreferencesPage = () => {
     <div className="min-h-screen bg-white text-gray-900">
       <div className="p-4">
         <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-gray-600 text-sm">Manage all your preferences</p>
+        <p className="text-gray-600 text-sm mb-6">Manage all your preferences</p>
 
         {/* Navigation Tabs */}
         <div className="flex space-x-2 mt-4 overflow-x-auto scrollbar-hide">
@@ -191,53 +219,58 @@ const PreferencesPage = () => {
           <p className="text-gray-600 text-sm mt-1">This expands the side navigation on hover.</p>
 
           <h3 className="text-lg font-medium mt-4 mb-2">Theme</h3>
-          <div className="space-y-2">
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="theme"
-                value="light"
-                checked={theme === 'light'}
-                onChange={() => {
-                  setTheme('light');
-                  localStorage.setItem('theme', 'light');
-                  document.documentElement.className = 'light';
-                }}
-                className="mr-2"
-              />
-              Light
-            </label>
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="theme"
-                value="dark"
-                checked={theme === 'dark'}
-                onChange={() => {
-                  setTheme('dark');
-                  localStorage.setItem('theme', 'dark');
-                  document.documentElement.className = 'dark';
-                }}
-                className="mr-2"
-              />
-              Dark
-            </label>
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="theme"
-                value="system"
-                checked={theme === 'system'}
-                onChange={() => {
-                  setTheme('system');
-                  localStorage.setItem('theme', 'system');
-                  document.documentElement.className = 'system';
-                }}
-                className="mr-2"
-              />
-              System
-            </label>
-          </div>
+          {mounted && (
+            <div className="space-y-2">
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
+                <input
+                  type="radio"
+                  name="theme"
+                  value="light"
+                  checked={theme === 'light'}
+                  onChange={() => {
+                    const newTheme = 'light';
+                    setTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                  }}
+                  className="mr-2"
+                />
+                <span>Light</span>
+              </label>
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
+                <input
+                  type="radio"
+                  name="theme"
+                  value="dark"
+                  checked={theme === 'dark'}
+                  onChange={() => {
+                    const newTheme = 'dark';
+                    setTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                  }}
+                  className="mr-2"
+                />
+                <span>Dark</span>
+              </label>
+              <label className="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
+                <input
+                  type="radio"
+                  name="theme"
+                  value="system"
+                  checked={theme === 'system'}
+                  onChange={() => {
+                    const newTheme = 'system';
+                    setTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                  }}
+                  className="mr-2"
+                />
+                <span>System</span>
+              </label>
+            </div>
+          )}
         </section>
       )}
 
