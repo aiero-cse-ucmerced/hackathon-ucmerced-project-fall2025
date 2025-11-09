@@ -6,7 +6,7 @@ export default function LoginLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-purple-600 dark:bg-purple-700">
       {children}
     </div>
   );

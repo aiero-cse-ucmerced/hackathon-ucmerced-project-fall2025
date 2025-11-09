@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useUser } from "../components/firebase";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Home() {
-  const user = useUser();
+  const { user } = useAuth();
 
   if (user) {
     return (

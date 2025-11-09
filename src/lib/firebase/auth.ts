@@ -20,16 +20,18 @@ export function onIdTokenChanged(cb: NextOrObserver<User>) {
 export async function login(email: string, password: string) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.error("Error signing in with Google", error);
+  } catch (error: any) {
+    console.error("Error signing in", error);
+    throw error;
   }
 }
 
 export async function signUp(email: string, password: string) {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.error("Error signing in with Google", error);
+  } catch (error: any) {
+    console.error("Error signing up", error);
+    throw error;
   }
 }
 
